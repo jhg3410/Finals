@@ -100,7 +100,7 @@ def isNeighborBetter(f0 , f1):
     return f0<f1        # f0과 f1비교
 ```
 
-먼저 csv 파일을 읽기위해 import csv를 해준다음 random과 math또한 import 해준다
+먼저 csv 파일을 읽기위해 import csv를 해준다음 random과 math또한 import 해준다.  
 isNeighborBetter은 앞선 1번 코드에서와 같지만 여기서 최적값이 최댓값으로하면 f1>f0을 하고 최솟값으로 하면 f1<f0으로 해주면 된다.
 
 ---
@@ -143,8 +143,8 @@ f.close()    # f 닫아주기
 hist = []       # 함수에 parameter로 넘겨줄 배열 초기화
 print("일일 코로나19 확진자가 가장 많았을 때의 확진자 수는?",solve(1,0.95,100,hist,lst))     # 출력
 ```
-먼저 컴퓨터 안에 저장한 csv파일을 읽어서 rdr에 저장시켜준다.
-그런 다음 rdr에서 첫 번쨰 열의 값들(일일 확진자 수)만 lst에 추가시켜준다.
+먼저 컴퓨터 안에 저장한 csv파일을 읽어서 rdr에 저장시켜준다.  
+그런 다음 rdr에서 첫 번쨰 열의 값들(일일 확진자 수)만 lst에 추가시켜준다.  
 그런다음 solve함수에 lst도 같이 넣어주고 실행
 
 ---
