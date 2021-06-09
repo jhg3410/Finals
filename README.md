@@ -85,7 +85,78 @@ def fit(x):
 ![image](https://user-images.githubusercontent.com/80373033/121338797-d30bc100-c958-11eb-8f24-e4e8969dd680.png)  
 최적값과 최솟값이 매우 유사하다. 결국 다른 함수를 넣어도 예상한 결과와 같이 나오는 것을 알 수 있다.
 
-## 2) Regression
+## 2-1) 공공 데이터와 모의 담금질 기법을 사용해 최적값 찾기
+데이터는 전국 일일 코로나 추가 확진자 수를 가져왔다.  
+[서울 열린 데이터 광장](http://data.seoul.go.kr/dataList/OA-20461/S/1/datasetView.do#AXexec)  
+이곳에서 서울은 물론 전국 확진자 수를 가져올 수 있다.
+
+### 코드 설명
+```python
+import csv      # csv 파일을 읽기 위한 라이브러리
+import random  
+import math
+
+def isNeighborBetter(f0 , f1): 
+    return f0<f1        # f0과 f1비교
+```
+
+먼저 csv 파일을 읽기위해 import csv를 해준다음 random과 math또한 import 해준다
+isNeighborBetter은 앞선 1번 코드에서와 같지만 여기서 최적값이 최댓값으로하면 f1>f0을 하고 최솟값으로 하면 f1<f0으로 해주면 된다.
+
+---
+
+
+```python
+def solve(t,a,niter,hist,lst):
+    f0 = random.choice(lst)        # parameter에서 받아온 lst중에서 랜덤으로 값 하나를 f0에 저장
+    hist.append(f0)     # parameter로 받아온 배열에 각 해들을 넣어준다.
+    for i in range(niter):  # niter = 반복 횟수
+        kt = int(2/t)       # kt는 t가 증가할수록 감소해야함으로 2/t로 해두었다.
+        for j in range(kt):     # kt만큼 반복
+            f1 = random.choice(lst)       # parameter에서 받아온 lst중에서 랜덤으로 값 하나를 f1에 저장
+            if isNeighborBetter(f0,f1):     # 비교해서 후보 해가 더 높으면 
+                f0 = f1     # 이웃해와 후보해 교환
+                hist.append(f0)     # 배열에 추가
+            else:       # 비교해서 이웃 해가 더 높으면
+                d = abs(f1 - f0)        # f1과 f0의 차를 절댓값으로 감싼 d
+                p0 = math.exp(-d/t)     #   p0 을 구해준다 p0 = 자유롭게 탐색할 확률, t와 p0는 정비례 해야하고 d와는 반비례 해야한다.
+                if random.random()<p0:       # 만약 p0이 random값보다 크면 교환 할 기회를 준다.
+                    f0 = f1     # 교환
+                    hist.append(f0)     #배열 추가
+        t *= a      # 반복할 때 마다 t값에 a값 곱해주기
+    return f0       # f0값 return
+```
+
+1번 코드와 바뀐점은 f0, f1값을 그저 random을 사용하여 임의로 정수값을 구한다음 fit함수를 적용해서 구했지만  
+이번엔 데이터를 사용함으로 데이터들을 배열로 가져온 인자값인 lst에서 random.choice를 이용해 배열내에서 랜덤으로 하나를 가져왔다.  
+그렇게 f0값과 f1값을 구하는 방식만 바꿔주면 된다.  
+
+```python
+f = open('C:/Users/82105/Downloads/전국 코로나19 확진자 발생동향.csv', 'r', encoding='utf-8')     # 컴퓨터 안에 있는 csv파일을 f에 저장
+rdr = csv.reader(f)     # f를 읽어서 rdr에 저장
+
+lst = []        # 배열 초기화
+for line in rdr:       # rdr에서 각 열들을 line에 넣고 반복
+    lst.append(int(line[0]))    #  line[0] 로 첫번 째 열의 각 요소들만 lst이 추가
+f.close()    # f 닫아주기
+
+hist = []       # 함수에 parameter로 넘겨줄 배열 초기화
+print("일일 코로나19 확진자가 가장 많았을 때의 확진자 수는?",solve(1,0.95,100,hist,lst))     # 출력
+```
+먼저 컴퓨터 안에 저장한 csv파일을 읽어서 rdr에 저장시켜준다.
+그런 다음 rdr에서 첫 번쨰 열의 값들(일일 확진자 수)만 lst에 추가시켜준다.
+그런다음 solve함수에 lst도 같이 넣어주고 실행
+
+---
+### 출력값  
+![image](https://user-images.githubusercontent.com/80373033/121359650-a793d100-c96e-11eb-8327-a47d31733b9e.png)  
+보다시피 최댓값을 기준으로 최적값을 구했기 때문에 데이터 중에 가장 큰 값을 표현했다.  
+반대로 일일 확진자가 가장 적게 나왔을 때도 코드 일부분만 수정하면 가능하다.  
+![image](https://user-images.githubusercontent.com/80373033/121359491-80d59a80-c96e-11eb-8b6a-ac4aa0b79369.png)  
+이렇게 공공 데이터를 가지고 표현했다.  
+2-2 에선 선형 회귀를 사용해 데이터 추론을 해보았다.  
+
+## 2-2) Regression
 ### 공공데이터를 가져와서 선형 회귀로 데이터를 추론
 데이터는 전국 일일 코로나 추가 확진자 수를 가져왔다.  
 [서울 열린 데이터 광장](http://data.seoul.go.kr/dataList/OA-20461/S/1/datasetView.do#AXexec)  
@@ -106,7 +177,7 @@ pandas는 데이터를 읽기 위한 라이브러리이다.
 sklearn은 파이썬 라이브러리중 머신러닝에 가장 유명하며 분류, 회귀, 군집화 등의 작업을 할 수 있다.  
 그중 LinearRegression을 사용하여 선형 회귀 작업을 한다.  
 ```python
-data = pd.read_csv(r"C:\Users\82105\Downloads\서울특별시 코로나19 확진자 발생동향.csv")
+data = pd.read_csv(r"C:\Users\82105\Downloads\전국 코로나19 확진자 발생동향.csv")
 
 x = np.array([])
 y = np.array([])
