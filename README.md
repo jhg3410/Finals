@@ -65,7 +65,7 @@ print함수로 f0값과 함수 호출 후 값이 추가된 hist 배열을 출력
 - 출력  
 ![image](https://user-images.githubusercontent.com/80373033/121330579-19f5b880-c951-11eb-8719-df6dc6c1ebc9.png)
 
-- (추론 과정값(hist의 각 요소)들을 그래프로 표현
+- (추론 과정값(hist의 각 요소)들을 그래프로 표현  
 ![image](https://user-images.githubusercontent.com/80373033/121330650-2aa62e80-c951-11eb-8305-08acc9221ddc.png)  
 결국엔 코드가 실행되면서 반복될 떄마다(시간이 지남에 따라) 결국에 최적값에 수렴하는 결과를 보여준다.  
 
