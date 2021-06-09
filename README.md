@@ -126,10 +126,10 @@ plt.scatter(x, y)     # 산점도 그래프 그려주는 코드(점을 뿌려준
 plt.plot(x, y_pred, color='red')    # 선을 그려준다 , 선 색 지정 가능
 plt.show()      # 실제 그래프 표현
 ```
-lr이란 변수를 초기화 시켜준다. 먼저 데이터를 넣은 x배열을 다차원으로 바꿔준다. 그런 다음 fit함수를 통해 lr에 x와 y 데이터를 넣어준다.
-그리고 predict를 함수를 사용해 데이터를 예측해서 y_pred에 저장시킨다.
-coef_와 intercept함수로 기울기와 절편을 구하고 추가로 x 값에 맞는 y값도 구해서 print한 다음에 plt.scatter로 산점도 그래프를 그려준다. 그저 데이터들을 x와 y에 맞게 점을 뿌려준다 생각하면 편하다.
-plot 함수에 x와 예측한 데이터인 y_pred를 넣어주어 선을 그리게 된다. color는 red로 하였다.
+lr이란 변수를 초기화 시켜준다. 먼저 데이터를 넣은 x배열을 다차원으로 바꿔준다. 그런 다음 fit함수를 통해 lr에 x와 y 데이터를 넣어준다.  
+그리고 predict를 함수를 사용해 데이터를 예측해서 y_pred에 저장시킨다.  
+coef_와 intercept함수로 기울기와 절편을 구하고 추가로 x 값에 맞는 y값도 구해서 print한 다음에 plt.scatter로 산점도 그래프를 그려준다. 그저 데이터들을 x와 y에 맞게 점을 뿌려준다 생각하면 편하다.  
+plot 함수에 x와 예측한 데이터인 y_pred를 넣어주어 선을 그리게 된다. color는 red로 하였다.  
 마지막으로 show 함수를 사용해서 실행함으로 그래프를 표현해준다
 ### 결과값
 ![image](https://user-images.githubusercontent.com/80373033/121339080-15cd9900-c959-11eb-91dd-8bee5f535897.png)  
