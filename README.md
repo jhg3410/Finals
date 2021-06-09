@@ -75,7 +75,7 @@ def fit(x):
 ## 2) Regression
 ### 공공데이터를 가져와서 선형 회귀로 데이터를 추론
 데이터는 전국 일일 코로나 추가 확진자 수를 가져왔다.
-서울 열린 데이터 광장
+[서울 열린 데이터 광장](http://data.seoul.go.kr/dataList/OA-20461/S/1/datasetView.do#AXexec)  
 이곳에서 서울은 물론 전국 확진자 수를 가져올 수 있다.
 
 ### 코드 설명
@@ -133,7 +133,7 @@ plot 함수에 x와 예측한 데이터인 y_pred를 넣어주어 선을 그리�
 마지막으로 show 함수를 사용해서 실행함으로 그래프를 표현해준다
 ### 결과값
 ![image](https://user-images.githubusercontent.com/80373033/121339080-15cd9900-c959-11eb-91dd-8bee5f535897.png)  
-- 출력값
+- 출력값  
 ![image](https://user-images.githubusercontent.com/80373033/121339119-2120c480-c959-11eb-9c87-c65bf16d94e8.png)  
 이렇게 되면 그래프에 나오는 예측 선(빨간 선)의 y = ax+b의 a와 b값을 구할 수 있다. 그래서 결과는 y = 1.805x - 47.67 이다.
 - y = 1.805x - 47.67 를 그래프로 표현  
