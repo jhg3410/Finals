@@ -81,6 +81,7 @@ def fit(x):
 ```
 보다시피  
 ![image](https://user-images.githubusercontent.com/80373033/121338716-bb343d00-c958-11eb-93a3-9e930b11379f.png)  
+  
 ![image](https://user-images.githubusercontent.com/80373033/121338797-d30bc100-c958-11eb-8f24-e4e8969dd680.png)  
 최적값과 최솟값이 매우 유사하다. 결국 다른 함수를 넣어도 예상한 결과와 같이 나오는 것을 알 수 있다.
 
