@@ -94,10 +94,10 @@ def fit(x):
 ### 코드 설명
 평소 알고리즘을 공부할 때는 vscode를 사용하지만 이번 과제는 pycharm에서 수행하는 것이 간편하여 pycharm에서 수행하였다.
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from sklearn.linear_model import LinearRegression
+import numpy as np      # 다차원 배열을 위한 라이브러리
+import matplotlib.pyplot as plt     # 데이터를 차트나 플롯 형태로 그려주는 라이브러리
+import pandas as pd     # 데이터를 읽기 위한 라이브러리
+from sklearn.linear_model import LinearRegression       # 분류, 회귀, 군집화 등의 작업을 할 수 있는 라이브러리
 ```
 먼저 import하는 구문이다 물론 4가지 모두 외부 라이브러리이기에 pip install을 해주어야 한다.  
 먼저 numpy는 과학 계산용 라이브러리로 데이터를 처리함으로 다차원 배열을 처리하는데 필요하다.  
