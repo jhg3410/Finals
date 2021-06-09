@@ -148,10 +148,12 @@ print("일일 코로나19 확진자가 가장 많았을 때의 확진자 수는?
 
 ---
 ### 출력값  
-![image](https://user-images.githubusercontent.com/80373033/121359650-a793d100-c96e-11eb-8327-a47d31733b9e.png)  
+- 일일 확진자가 가장 많았을 때의 확진자 수를 최적값으로  
+![image](https://user-images.githubusercontent.com/80373033/121359961-f6416b00-c96e-11eb-96d4-41bc9c7ce8ca.png)  
 보다시피 최댓값을 기준으로 최적값을 구했기 때문에 데이터 중에 가장 큰 값을 표현했다.  
+- 일일 확진자가 가장 적었을 때의 확진자 수를 최적값으로  
+![image](https://user-images.githubusercontent.com/80373033/121360036-05281d80-c96f-11eb-8bc9-264cf8090c41.png)  
 반대로 일일 확진자가 가장 적게 나왔을 때도 코드 일부분만 수정하면 가능하다.  
-![image](https://user-images.githubusercontent.com/80373033/121359491-80d59a80-c96e-11eb-8b6a-ac4aa0b79369.png)  
 이렇게 공공 데이터를 가지고 표현했다.  
 2-2 에선 선형 회귀를 사용해 데이터 추론을 해보았다.  
 
