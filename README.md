@@ -86,11 +86,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 ```
-먼저 import하는 구문이다 물론 4가지 모두 외부 라이브러리이기에 pip install을 해주어야 한다.
-먼저 numpy는 과학 계산용 라이브러리로 데이터를 처리함으로 다차원 배열을 처리하는데 필요하다.
-matplotlib는 데이터를 차트나 플롯 형태로 그려주는 라이브러리이다.
-pandas는 데이터를 읽기 위한 라이브러리이다.
-sklearn은 파이썬 라이브러리중 머신러닝에 가장 유명하며 분류, 회귀, 군집화 등의 작업을 할 수 있다. 그중 LinearRegression을 사용하여 선형 회귀 작업을 한다.
+먼저 import하는 구문이다 물론 4가지 모두 외부 라이브러리이기에 pip install을 해주어야 한다.  
+먼저 numpy는 과학 계산용 라이브러리로 데이터를 처리함으로 다차원 배열을 처리하는데 필요하다.  
+matplotlib는 데이터를 차트나 플롯 형태로 그려주는 라이브러리이다.  
+pandas는 데이터를 읽기 위한 라이브러리이다.  
+sklearn은 파이썬 라이브러리중 머신러닝에 가장 유명하며 분류, 회귀, 군집화 등의 작업을 할 수 있다. 그중 LinearRegression을 사용하여 선형 회귀 작업을 한다.  
 ```python
 data = pd.read_csv(r"C:\Users\82105\Downloads\서울특별시 코로나19 확진자 발생동향.csv")
 
@@ -105,9 +105,9 @@ for j in data['plus']:      # plus열 참조
     y = np.append(y, np.array([j]))     # plus 요소들을 x 배열에 추가
 
 ```
-이 부분은 먼저 pandas를 이용해 내가 다운받은 csv파일(경로 참조)을 읽어서 data에 넣어준다
-date와 plus는 각각 주석에서 알 수 있듯 날짜를 오름차순으로 한 숫자 이며 plus는 일일 추가 확진자 수이다.
-그런다음 x와 y를 numpy array로 초기화해주고 data에 coulum의 영역을 반복문으로 참조하면 coulum의 요소들이 하나씩 i에 대입되어진다.
+이 부분은 먼저 pandas를 이용해 내가 다운받은 csv파일(경로 참조)을 읽어서 data에 넣어준다  
+date와 plus는 각각 주석에서 알 수 있듯 날짜를 오름차순으로 한 숫자 이며 plus는 일일 추가 확진자 수이다.  
+그런다음 x와 y를 numpy array로 초기화해주고 data에 coulum의 영역을 반복문으로 참조하면 coulum의 요소들이 하나씩 i에 대입되어진다.  
 그것들을 각 x, y에 넣어준다.
 ```python 
 lr = LinearRegression()   # 변수 초기화
