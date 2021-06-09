@@ -74,7 +74,7 @@ def fit(x):
 
 ## 2) Regression
 ### 공공데이터를 가져와서 선형 회귀로 데이터를 추론
-데이터는 전국 일일 코로나 추가 확진자 수를 가져왔다.
+데이터는 전국 일일 코로나 추가 확진자 수를 가져왔다.  
 [서울 열린 데이터 광장](http://data.seoul.go.kr/dataList/OA-20461/S/1/datasetView.do#AXexec)  
 이곳에서 서울은 물론 전국 확진자 수를 가져올 수 있다.
 
@@ -90,7 +90,8 @@ from sklearn.linear_model import LinearRegression
 먼저 numpy는 과학 계산용 라이브러리로 데이터를 처리함으로 다차원 배열을 처리하는데 필요하다.  
 matplotlib는 데이터를 차트나 플롯 형태로 그려주는 라이브러리이다.  
 pandas는 데이터를 읽기 위한 라이브러리이다.  
-sklearn은 파이썬 라이브러리중 머신러닝에 가장 유명하며 분류, 회귀, 군집화 등의 작업을 할 수 있다. 그중 LinearRegression을 사용하여 선형 회귀 작업을 한다.  
+sklearn은 파이썬 라이브러리중 머신러닝에 가장 유명하며 분류, 회귀, 군집화 등의 작업을 할 수 있다.  
+그중 LinearRegression을 사용하여 선형 회귀 작업을 한다.  
 ```python
 data = pd.read_csv(r"C:\Users\82105\Downloads\서울특별시 코로나19 확진자 발생동향.csv")
 
