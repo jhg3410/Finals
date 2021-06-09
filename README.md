@@ -50,5 +50,97 @@ print("추론 과정 :",hist)
 ```
 ---
 ### 결과값
+- 출력  
+![image](https://user-images.githubusercontent.com/80373033/121330579-19f5b880-c951-11eb-8719-df6dc6c1ebc9.png)
+
+- 그래프로 표현  
+![image](https://user-images.githubusercontent.com/80373033/121330650-2aa62e80-c951-11eb-8305-08acc9221ddc.png)  
+결국엔 코드가 실행되면서 반복될 떄마다(시간이 지남에 따라) 결국에 최적값에 수렴하는 결과를 보여준다.  
+
+### 결과값과 함수비교  
+위 코드에 사용한 함수를 실제 그래프로 표현한 것이다.  
+![image](https://user-images.githubusercontent.com/80373033/121330755-43164900-c951-11eb-8961-f4f284290b1e.png)  
+사진에 나온 최솟값과 추론해서 나온 최적값이 매우 유사해서 잘 나왔다고 할 수 있다.
+
+### 다른 함수 넣어보기
+```python
+def fit(x):
+    return 4*x*x*x*x + 5*x*x - 7 
+```
+보다시피  
+![image](https://user-images.githubusercontent.com/80373033/121338716-bb343d00-c958-11eb-93a3-9e930b11379f.png)  
+![image](https://user-images.githubusercontent.com/80373033/121338797-d30bc100-c958-11eb-8f24-e4e8969dd680.png)  
+다른 함수를 넣어도 예상한 결과와 같이 나오는 것을 알 수 있다.
+
+## 2) Regression
+### 공공데이터를 가져와서 선형 회귀로 데이터를 추론
+데이터는 전국 일일 코로나 추가 확진자 수를 가져왔다.
+서울 열린 데이터 광장
+이곳에서 서울은 물론 전국 확진자 수를 가져올 수 있다.
+
+### 코드 설명
+평소 알고리즘을 공부할 때는 vscode를 사용하지만 이번 과제는 pycharm에서 수행하는 것이 간편하여 pycharm에서 수행하였다.
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+```
+먼저 import하는 구문이다 물론 4가지 모두 외부 라이브러리이기에 pip install을 해주어야 한다.
+먼저 numpy는 과학 계산용 라이브러리로 데이터를 처리함으로 다차원 배열을 처리하는데 필요하다.
+matplotlib는 데이터를 차트나 플롯 형태로 그려주는 라이브러리이다.
+pandas는 데이터를 읽기 위한 라이브러리이다.
+sklearn은 파이썬 라이브러리중 머신러닝에 가장 유명하며 분류, 회귀, 군집화 등의 작업을 할 수 있다. 그중 LinearRegression을 사용하여 선형 회귀 작업을 한다.
+```python
+data = pd.read_csv(r"C:\Users\82105\Downloads\서울특별시 코로나19 확진자 발생동향.csv")
+
+x = np.array([])
+y = np.array([])
+
+# date = 2020/04/22 을 1로 잡고 2021/06/08 까지 오름차순 숫자 목록
+for i in data['date']:      # date열 참조
+    x = np.append(x, np.array([i]))     # date 요소들을 x 배열에 추가
+# plus = date기준으로 일일 추가 확진자 수
+for j in data['plus']:      # plus열 참조
+    y = np.append(y, np.array([j]))     # plus 요소들을 x 배열에 추가
+
+```
+이 부분은 먼저 pandas를 이용해 내가 다운받은 csv파일(경로 참조)을 읽어서 data에 넣어준다
+date와 plus는 각각 주석에서 알 수 있듯 날짜를 오름차순으로 한 숫자 이며 plus는 일일 추가 확진자 수이다.
+그런다음 x와 y를 numpy array로 초기화해주고 data에 coulum의 영역을 반복문으로 참조하면 coulum의 요소들이 하나씩 i에 대입되어진다.
+그것들을 각 x, y에 넣어준다.
+```python 
+lr = LinearRegression()   # 변수 초기화
+
+x = x.reshape(-1,1)     # x를 다차원으로 바꿔주는 코드 -1은 남은 배열값을 자동 처리해주는 값 1은 열의 값
+
+lr.fit(x, y)       # lr 에 x,y 데이터를 준다.
+
+y_pred = lr.predict(x)      # predict는 데이터를 예측해주는 함수 , 예측 결과를 y_pred에 저장
+
+print("기울기 :", lr.coef_[0])        # 기울기
+print("절편 :", lr.intercept_)        # 절편
+print("x가 200 일 때의 y 값 :", lr.predict([[200]])[0])     # predit 함수에 200을 넣어줌으로 y값이 나온다 그냥 출력하면 []로 표시해서 [0]을 뒤에 넣었다.
+
+plt.scatter(x, y)     # 산점도 그래프 그려주는 코드(점을 뿌려준다 생각)
+plt.plot(x, y_pred, color='red')    # 선을 그려준다 , 선 색 지정 가능
+plt.show()      # 실제 그래프 표현
+```
+lr이란 변수를 초기화 시켜준다. 먼저 데이터를 넣은 x배열을 다차원으로 바꿔준다. 그런 다음 fit함수를 통해 lr에 x와 y 데이터를 넣어준다.
+그리고 predict를 함수를 사용해 데이터를 예측해서 y_pred에 저장시킨다.
+coef_와 intercept함수로 기울기와 절편을 구하고 추가로 x 값에 맞는 y값도 구해서 print한 다음에 plt.scatter로 산점도 그래프를 그려준다. 그저 데이터들을 x와 y에 맞게 점을 뿌려준다 생각하면 편하다.
+plot 함수에 x와 예측한 데이터인 y_pred를 넣어주어 선을 그리게 된다. color는 red로 하였다.
+마지막으로 show 함수를 사용해서 실행함으로 그래프를 표현해준다
+### 결과값
+![image](https://user-images.githubusercontent.com/80373033/121339080-15cd9900-c959-11eb-91dd-8bee5f535897.png)  
+- 출력값
+![image](https://user-images.githubusercontent.com/80373033/121339119-2120c480-c959-11eb-9c87-c65bf16d94e8.png)  
+이렇게 되면 그래프에 나오는 예측 선(빨간 선)의 y = ax+b의 a와 b값을 구할 수 있다. 그래서 결과는 y = 1.805x - 47.67 이다.
+- y = 1.805x - 47.67 를 그래프로 표현  
+ ![image](https://user-images.githubusercontent.com/80373033/121339186-30a00d80-c959-11eb-9a57-f1396ccd4c0c.png)  
+다르게 보일 수 있지만
+위의 출력값에서 X가 200일 떄의 값과 함수 그래프에서 표시한 X가 200일 떄의 값이 동일하다는 것으로 사실은 같은 함수를 가지는 선이란 것을 알 수 있습니다.
+
+
 
 
